@@ -235,7 +235,7 @@ for i in new_bin0:
             check.append(r1.item(0)) 
             data1 = normal_ecg_transfer(hrdata1,new_test,fs)
             #r_from_pd_df = ro.conversion.py2rpy(data1)
-            hrvpart0= hrvtransform2_only_normal_ECG_filter_hr(hrdata1,new_test,fs,hrv1,settings_time,settings_welch,settings_ar,settings_lomb,settings_nonlinear)
+            hrvpart0= hrvtransform2_only_normal_ECG_filter_hr(hrdata1,new_test,fs,hrv1,settings_time,settings_welch,settings_ar,settings_lomb,settings_nonlinear, max_lag=50)
             hrvpart = ECG_grid_func_r(data1)
             hrvpart['time_min'] = i/7500
             warnings.filterwarnings("ignore")
