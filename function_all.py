@@ -920,7 +920,7 @@ def ECG_data_extend1(data):
 	
 	
 #  update funciton-normal
-def hrvtransform2_only_normal_ECG_filter_hr(hrdata1,new_test,fs,hrv1,settings_time,settings_welch,settings_ar,settings_lomb,settings_nonlinear,maxlag=50):
+def hrvtransform2_only_normal_ECG_filter_hr(hrdata1,new_test,fs,hrv1,settings_time,settings_welch,settings_ar,settings_lomb,settings_nonlinear,max_lag=50):
 
         #from biosppy.signals import ecg
         hrdata1 = hrdata1[~pd.isnull(hrdata1)]
@@ -1156,6 +1156,7 @@ def update_new_bin1(old_bin):
     ind_min = np.append(np.arange(begin, last, step = 1), last)
     update_bin = ind_min*7500
     return(update_bin)
+
 
 
 
