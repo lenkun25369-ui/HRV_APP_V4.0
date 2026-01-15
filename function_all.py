@@ -1003,28 +1003,17 @@ def hrvtransform2_only_normal_ECG_filter_hr(hrdata1,new_test,fs,hrv1,settings_ti
         df['time'] =np.cumsum(df['rr'])
         columns_titles = ["time","rr"]
         df=df.reindex(columns=columns_titles)
-        df['stationary']=df['rr'].diff(arr.argmax(0))
+        lag = arr.argmax(0)
+        if lag == 0: 
+            lag = 1
+        df['stationary'] = df['rr'].diff(lag)
 
 
 
 #create datasets
         X = df['stationary'].dropna()
-# the autoregression model
-        ar_result = auto_ar_predict(X)
-        best_lag =ar_result["best_lag"]
-        model = AutoReg(X, lags=best_lag)
-        model_fitted = model.fit()
-        predictions = model_fitted.predict(start=best_lag, end=len(X))
-
-        r2 = r2_score(df['stationary'].tail(len(predictions)), predictions)
-        rmse = sqrt(mean_squared_error(df['stationary'].tail(len(predictions)), predictions))
-
-        df['stationary']=df['rr'].diff(best_lag)
-#create datasets
-        X = df['stationary'].dropna()
-
 #train the autoregression model
-        ar_result = auto_ar_predict(X)
+        ar_result = auto_ar_predict(X,max_lag = max_lag)
         best_lag =ar_result["best_lag"]
         model = AutoReg(X, lags=best_lag)
         model_fitted = model.fit()
