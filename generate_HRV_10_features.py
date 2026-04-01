@@ -4,6 +4,15 @@
 # In[4]:
 import os
 import sys
+import sys
+
+print("PYTHON EXECUTABLE:", sys.executable)
+
+try:
+    import pkg_resources
+    print("pkg_resources OK")
+except Exception as e:
+    print("pkg_resources ERROR:", repr(e))
 import types
 
 
