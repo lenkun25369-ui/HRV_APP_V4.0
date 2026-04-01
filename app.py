@@ -1,4 +1,4 @@
-import os, json, tempfile, subprocess
+import os, json, tempfile, subprocess, sys
 import streamlit as st
 import requests
 import streamlit.components.v1 as components
@@ -100,7 +100,7 @@ if token and obs_url:
                 # ----- Parse ECG -----
                 with st.spinner("Parsing ECG..."):
                     proc = subprocess.run(
-                        ["python", "parse_fhir_ecg_to_csv.py", obs_path, ecg_csv],
+                        [sys.executable, "parse_fhir_ecg_to_csv.py", obs_path, ecg_csv],
                         capture_output=True,
                         text=True
                     )
@@ -123,7 +123,7 @@ if token and obs_url:
                 # ----- Generate HRV Features -----
                 with st.spinner("Generating HRV features..."):
                     proc = subprocess.run(
-                        ["python", "generate_HRV_10_features.py", ecg_csv, h0_csv],
+                        [sys.executable, "generate_HRV_10_features.py", ecg_csv, h0_csv],
                         capture_output=True,
                         text=True
                     )
